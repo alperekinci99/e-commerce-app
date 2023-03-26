@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 // pages
 import { Home } from "./pages/Home";
 import { Cart } from "./pages/Cart";
+import { NotFound } from "./pages/NotFound";
 import { Products } from "./pages/Products";
 import { ProductDetail } from "./pages/ProductDetail";
 import { useEffect, useState } from "react";
@@ -100,8 +101,12 @@ function App() {
             { path: '/products/:productId', element: <ProductDetail urunEkle={addProduct} sepettekiUrunler={cartList}/> }
           ]
         },
+        {
+          path: '*', element: <NotFound />
+        }
       ]
-    }
+    },
+    
   ]);
   return (
     <RouterProvider router={router} />

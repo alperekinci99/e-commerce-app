@@ -548,6 +548,13 @@ header{
     }
 }
 
+.not-page{
+    padding: 3rem 0;
+    h1{
+        font-size: 30px;
+    }
+}
+
 @media (max-width:600px){
     header {
         .menu-area{
