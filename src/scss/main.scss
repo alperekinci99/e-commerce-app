@@ -191,6 +191,52 @@ header{
                                     font-weight: 600;
                                 }
                             }
+                            .action-area{
+                                margin-top: 0.75rem;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: stretch;
+                                .left{
+                                    display: inline-block;
+                                    background-color: #fff;
+                                    border-radius: 10px;
+                                    padding: 0.3rem 0.55rem;
+                                    button{
+                                        border: 0;
+                                        border-radius: 0;
+                                        background-color: transparent;
+                                        font-size: 18px;
+                                        font-weight: 600;
+                                        cursor: pointer;
+                                        &.decrease{
+                                            color: rgb(184, 9, 9);
+                                        }
+                                        &.increase{
+                                            color: rgb(26, 174, 26);
+                                        }
+                                    }
+                                    input{
+                                        text-align: center;
+                                        background-color: transparent;
+                                        border: 0;
+                                        width: 45px;
+                                        &:focus{
+                                            outline: 0;
+                                        }
+                                    }
+                                }
+                                .right{
+                                    button{
+                                        background-color: rgb(184, 9, 9);
+                                        padding: 4px 8px;
+                                        color: #fff;
+                                        border: 0;
+                                        border-radius: 4px;
+                                        cursor: pointer;
+                                    }
+                                }
+                                
+                            }
                         }
                         &:not(:last-child){
                             border-bottom: 1px solid #fff;

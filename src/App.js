@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [ cartList, setCartList ] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   // component yüklendiğinde localStorage üzerinden değerleri getir
   useEffect(() => {
@@ -23,7 +24,6 @@ function App() {
     }
   }, []);
 
-  // notes state'i update edildiğinde
   useEffect(() => {
       localStorage.setItem('products', JSON.stringify(cartList))
   }, [cartList])
@@ -33,6 +33,9 @@ function App() {
       if(!cartList.includes(product)){
         product.quantity = 1;
         setCartList(prevList => [...prevList, product]);
+        setTotalPrice(
+          prevPrice => prevPrice += product.price
+        )
         toast.success("Ürün başarıyla sepete eklendi!", {
           position: "bottom-right",
           autoClose: 2500,
@@ -51,6 +54,9 @@ function App() {
 
   const removeProduct = (product) => {
       setCartList(prevList => prevList.filter(item => item.id !== product.id));
+      setTotalPrice(
+        prevPrice => prevPrice -= (product.price * product.quantity)
+      )
       toast.error("Ürünü başarıyla sildiniz!", {
         position: "bottom-right",
         autoClose: 2500,
@@ -67,6 +73,9 @@ function App() {
         return item;
       }
     }));
+    setTotalPrice(
+      prevPrice => prevPrice += product.price
+    )
   }
   const decQuantity = (product) => {
     setCartList(prevList => prevList.map((item) => {
@@ -76,24 +85,19 @@ function App() {
         return item;
       }
     }));
-  }
-  
-  const getTotalPrice = () => {
-    let totalPrice = 0;
-    cartList.forEach((urun) => {
-      totalPrice += urun.price
-    });
-    return totalPrice;
+    setTotalPrice(
+      prevPrice => prevPrice -= product.price
+    )
   }
 
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <MainLayout urunler={cartList} urunSayisi={cartList.length} />,
+      element: <MainLayout urunler={cartList} urunSayisi={cartList.length} urunSil={removeProduct} adetArttir={incQuantity} adetAzalt={decQuantity}/>,
       children: [
         {index: true, element: <Home urunEkle={addProduct} />},
         {path: 'home', element: <Home />},
-        {path: 'cart', element: <Cart urunler={cartList} urunSil={removeProduct} adetArttir={incQuantity} adetAzalt={decQuantity} toplamFiyat={getTotalPrice}/>},
+        {path: 'cart', element: <Cart urunler={cartList} urunSil={removeProduct} adetArttir={incQuantity} adetAzalt={decQuantity} toplamFiyat={totalPrice}/>},
         {
           path: 'products', 
           children: [

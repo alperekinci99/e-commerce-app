@@ -1,8 +1,6 @@
-import { useState } from "react"
 import Breadcrumb from "../components/Breadcrumb"
 
 export function Cart(props){
-    const [totalPrice, setTotalPrice] = useState(props.toplamFiyat);
 
     const links = [{
         url: '/cart',
@@ -13,25 +11,16 @@ export function Cart(props){
     const removeProduct = (product) => {
         if(window.confirm('Ürünü silmek istediğinize emin misiniz?')){
             props.urunSil(product);
-            setTotalPrice(
-                prevPrice => prevPrice -= (product.price * product.quantity)
-            )
         }
         
     }
 
     const increaseQuantity = (product) => {
         props.adetArttir(product);
-        setTotalPrice(
-            prevPrice => prevPrice += product.price
-        )
     }
 
     const decreaseQuantity = (product) => {
         props.adetAzalt(product);
-        setTotalPrice(
-            prevPrice => prevPrice -= product.price
-        )
     }
     
     return(
@@ -69,7 +58,7 @@ export function Cart(props){
                 <div className="sidebar">
                     <div className="content">
                         <div className="totalPrice">
-                            Toplam Fiyat: <span> {totalPrice} TL</span>
+                            Toplam Fiyat: <span> {props.toplamFiyat} TL</span>
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,7 @@ export function MainLayout(props){
 
     return(
         <>
-            <Header urunler={props.urunler} urunSayisi={props.urunSayisi}/>
+            <Header urunler={props.urunler} urunSayisi={props.urunSayisi} urunSil={props.urunSil} adetArttir={props.adetArttir} adetAzalt={props.adetAzalt}/>
             <main>
                 <div className="container">
                     <Outlet />

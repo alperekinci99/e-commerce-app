@@ -37,7 +37,7 @@ export default function Header(props){
                                     {props.urunSayisi}
                                 </div>
                             </div>
-                            <CartSide urunler={props.urunler}/>
+                            <CartSide urunler={props.urunler} urunSil={props.urunSil} adetArttir={props.adetArttir} adetAzalt={props.adetAzalt}/>
                         </div>
                     </div>   
                 </nav>
